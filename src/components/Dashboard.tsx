@@ -1,10 +1,30 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { MarketAsset } from "@/lib/types";
+import { fetchMarketData } from "@/lib/api";
 import { MarketCard } from "./MarketCard";
 import { TransactionLedger } from "./TransactionLedger";
 import { ThemeToggle } from "./ThemeToggle";
 import { UserGuide } from "./UserGuide";
 
-export function Dashboard({ initialAssets }: { initialAssets: MarketAsset[] }) {
+export function Dashboard() {
+  const [assets, setAssets] = useState<MarketAsset[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchMarketData();
+      setAssets(data);
+      setLoading(false);
+    };
+    loadData();
+    
+    // Optional: Auto-refresh every 60 seconds on the client
+    const interval = setInterval(loadData, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="flex-1 p-4 sm:p-6 md:p-12 lg:p-24 max-w-7xl mx-auto w-full space-y-8 md:space-y-12">
       <header className="flex flex-col md:flex-row md:items-start justify-between gap-6 relative">
@@ -26,17 +46,25 @@ export function Dashboard({ initialAssets }: { initialAssets: MarketAsset[] }) {
         </div>
       </header>
 
-      {/* Market Ticker Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {initialAssets.map((asset) => (
-          <MarketCard key={asset.id} asset={asset} />
-        ))}
-      </section>
+      {loading ? (
+        <div className="flex justify-center items-center py-20">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-500"></div>
+        </div>
+      ) : (
+        <>
+          {/* Market Ticker Grid */}
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {assets.map((asset) => (
+              <MarketCard key={asset.id} asset={asset} />
+            ))}
+          </section>
 
-      {/* Holdings Ledger */}
-      <section>
-        <TransactionLedger assets={initialAssets} />
-      </section>
+          {/* Holdings Ledger */}
+          <section>
+            <TransactionLedger assets={assets} />
+          </section>
+        </>
+      )}
     </main>
   );
 }

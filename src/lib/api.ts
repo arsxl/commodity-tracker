@@ -5,8 +5,7 @@ export async function fetchMarketData(): Promise<MarketAsset[]> {
     // Fetch real market data including 7d sparkline natively in AED
     // pax-gold = 1 oz Gold, kinesis-silver = 1 oz Silver
     const cryptoRes = await fetch(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=aed&ids=pax-gold,kinesis-silver,bitcoin,ethereum&order=market_cap_desc&sparkline=true&price_change_percentage=24h",
-      { next: { revalidate: 60 } }
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=aed&ids=pax-gold,kinesis-silver,bitcoin,ethereum&order=market_cap_desc&sparkline=true&price_change_percentage=24h"
     );
     
     if (!cryptoRes.ok) throw new Error("Failed to fetch market data");

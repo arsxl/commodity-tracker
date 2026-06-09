@@ -34,7 +34,7 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/arsxl/commodity-tracker.git
    cd commodity-tracker
    ```
 
