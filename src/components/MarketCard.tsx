@@ -72,7 +72,7 @@ export function MarketCard({ asset }: { asset: MarketAsset }) {
                 <LineChart data={chartData}>
                   <Tooltip 
                     contentStyle={{ backgroundColor: 'var(--tooltip-bg, #09090b)', borderColor: 'var(--tooltip-border, #27272a)', fontFamily: 'monospace', fontSize: '10px', padding: '4px', color: 'var(--tooltip-text, #fff)' }}
-                    formatter={(value: number) => [formatCurrency(value, "AED"), ""]}
+                    formatter={(value: any) => [formatCurrency(Number(value) || 0, "AED"), ""]}
                     labelFormatter={() => ""}
                     position={{ y: -30 }}
                     cursor={{ stroke: '#a1a1aa', strokeWidth: 1, strokeDasharray: '3 3' }}
