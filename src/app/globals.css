@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* Bind dark variants to the .dark class (Next-Themes support for Tailwind v4) */
+@variant dark (&:is(.dark *));
+
+:root {
+  /* Light Mode */
+  --background: #ffffff;
+  --foreground: #09090b;
+  
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  
+  --border: #e4e4e7;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+
+  --tooltip-bg: #ffffff;
+  --tooltip-border: #e4e4e7;
+  --tooltip-text: #09090b;
+}
+
+.dark {
+  /* Dark Mode */
+  --background: #09090b;
+  --foreground: #ededed;
+  
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  
+  --border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(24, 24, 27, 0.5);
+
+  --tooltip-bg: #09090b;
+  --tooltip-border: #27272a;
+  --tooltip-text: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Base custom utilities */
+@layer utilities {
+  .glass-card {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+  }
+}
