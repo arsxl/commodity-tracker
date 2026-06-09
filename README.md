@@ -4,7 +4,7 @@ A beautifully designed, premium web application for tracking physical commoditie
 
 Built with Next.js 15, React 19, and Tailwind CSS v4.
 
-![Dashboard Preview](./public/icon-512x512.png) *(Imagine the stunning UI here)*
+![Dashboard Preview](./public/screenshot.png)
 
 ## ✨ Key Features
 
